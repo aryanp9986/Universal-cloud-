@@ -1,0 +1,141 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pro VPS Plans</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #000814;
+      color: #d0e7ff;
+    }
+    .card {
+      position: relative;
+      background: #001d3d;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 0 10px #0096c7aa, 0 0 20px #00b4d8aa;
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.02);
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      background: linear-gradient(270deg, #00b4d8, #48cae4, #00b4d8);
+      background-size: 600% 600%;
+      z-index: 0;
+      border-radius: 1.5rem;
+      animation: borderGlow 6s linear infinite;
+    }
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #001d3d;
+      border-radius: 1.5rem;
+      z-index: 1;
+      opacity: 0.95;
+    }
+    .card > * {
+      position: relative;
+      z-index: 2;
+    }
+    .buy-button {
+      background: linear-gradient(135deg, #00b4d8, #48cae4);
+      border: none;
+      border-radius: 9999px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 700;
+      color: #000;
+      box-shadow: 0 0 15px #00e0ff99;
+      transition: 0.3s ease;
+      text-align: center;
+      display: inline-block;
+      width: 100%;
+    }
+    .buy-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px #90e0efbb;
+    }
+    .section-title {
+      font-size: 3rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #00b4d8;
+      text-shadow: 0 0 8px #00b4d8, 0 0 14px #48cae4;
+    }
+    .neon-title {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #90e0ef;
+      text-shadow: 0 0 5px #90e0ef, 0 0 10px #00b4d8;
+    }
+    @keyframes borderGlow {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
+</head>
+<body x-data="{ page: 'home', selectedPlan: null, selectPlan(plan) { this.selectedPlan = plan; this.page = 'payment'; } }">
+  <template x-if="page === 'home'">
+    <div class="px-4 py-10 max-w-6xl mx-auto">
+      <h1 class="section-title">Pro VPS Hosting Plans</h1>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <template x-for="(plan, index) in [
+          { name: 'VPS Starter', ram: '4GB', storage: '80GB SSD', price: 14.99, original: 19.99, rating: '★★★★☆', reviews: 120 },
+          { name: 'VPS Boost', ram: '8GB', storage: '160GB SSD', price: 19.99, original: 24.99, rating: '★★★★☆', reviews: 150 },
+          { name: 'VPS Turbo', ram: '16GB', storage: '320GB SSD', price: 29.99, original: 34.99, rating: '★★★★★', reviews: 180 },
+          { name: 'VPS Ultra', ram: '32GB', storage: '640GB SSD', price: 49.99, original: 59.99, rating: '★★★★★', reviews: 200 },
+          { name: 'VPS Titan', ram: '48GB', storage: '960GB SSD', price: 69.99, original: 79.99, rating: '★★★★★', reviews: 230 },
+          { name: 'VPS Cosmic', ram: '64GB', storage: '1.2TB SSD', price: 89.99, original: 99.99, rating: '★★★★★', reviews: 260 },
+          { name: 'VPS Warp', ram: '80GB', storage: '1.5TB SSD', price: 109.99, original: 119.99, rating: '★★★★★', reviews: 300 },
+          { name: 'VPS Infinity', ram: '128GB', storage: '2TB SSD', price: 139.99, original: 149.99, rating: '★★★★★', reviews: 340 }
+        ]" :key="index">
+          <div class="card">
+            <h2 class="neon-title" x-text="plan.name"></h2>
+            <p class="mt-2 text-blue-200" x-text="plan.ram + ' RAM, ' + plan.storage + ', High-Speed Network' "></p>
+            <div class="mt-4 text-cyan-300 font-bold text-lg">
+              $<span x-text="plan.price.toFixed(2)"></span>
+              <span class="line-through text-red-400 ml-2 text-sm">$<span x-text="plan.original.toFixed(2)"></span></span>
+            </div>
+            <div class="mt-2 text-sm text-blue-100">
+              <span x-text="plan.rating"></span> (<span x-text="plan.reviews"></span> reviews)
+            </div>
+            <button class="buy-button mt-4" @click="selectPlan(plan)">Buy <span x-text="plan.name"></span></button>
+          </div>
+        </template>
+      </div>
+    </div>
+  </template>  <template x-if="page === 'payment'">
+    <div class="max-w-xl mx-auto mt-16 text-center">
+      <h1 class="section-title">Payment Page</h1>
+      <div class="bg-blue-950 bg-opacity-60 p-6 rounded-2xl shadow-xl border border-cyan-400">
+        <h2 class="text-2xl font-bold text-cyan-300 mb-4" x-text="'You are purchasing: ' + selectedPlan.name"></h2>
+        <p class="text-lg mb-2 text-blue-200" x-text="'Price: $' + selectedPlan.price.toFixed(2)"></p>
+        <button class="buy-button mt-4 w-full">Proceed to Payment</button>
+        <button class="mt-4 underline text-sm text-cyan-200" @click="page = 'home'">Back to Plans</button>
+      </div>
+    </div>
+  </template>
+</body>
+  </html>
