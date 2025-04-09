@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,6 +30,14 @@
 </head>
 <body class="p-6">
   <div class="max-w-5xl mx-auto">
+    <!-- Back Button -->
+    <div class="mb-4">
+      <button onclick="goBack()" class="flex items-center gap-2 text-[#00ffff] hover:text-cyan-300 neon">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back</span>
+      </button>
+    </div>
+
     <!-- Profile Info -->
     <div class="flex flex-col sm:flex-row items-center gap-6 mb-8">
       <div class="relative">
@@ -45,48 +54,52 @@
         <button onclick="openEditModal()" class="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded neon-border">Edit Profile</button>
         <button onclick="logout()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded neon-border">Logout</button>
       </div>
-    </div><!-- Tabs -->
-<div>
-  <div class="flex border-b border-gray-600 mb-4">
-    <button onclick="showTab('servers', event)" class="tab-btn px-4 py-2 border-b-2 tab-active">Servers / VPS</button>
-    <button onclick="showTab('others', event)" class="tab-btn px-4 py-2 border-b-2 text-gray-400">Other Purchases</button>
-    <button onclick="showTab('billing', event)" class="tab-btn px-4 py-2 border-b-2 text-gray-400">Billing</button>
-  </div>
+    </div>
 
-  <!-- Servers/VPS Tab -->
-  <div id="servers" class="tab-content">
-    <div class="grid gap-4">
-      <div class="bg-[#1a1a1a] p-4 rounded-lg neon-border flex justify-between items-center">
-        <div>
-          <h4 class="text-lg font-semibold text-[#00ffff]">Minecraft Server</h4>
-          <p class="text-sm text-gray-400">Expires: 2025-05-10 | Status: Active</p>
+    <!-- Tabs -->
+    <div>
+      <div class="flex border-b border-gray-600 mb-4">
+        <button onclick="showTab('servers', event)" class="tab-btn px-4 py-2 border-b-2 tab-active">Servers / VPS</button>
+        <button onclick="showTab('others', event)" class="tab-btn px-4 py-2 border-b-2 text-gray-400">Other Purchases</button>
+        <button onclick="showTab('billing', event)" class="tab-btn px-4 py-2 border-b-2 text-gray-400">Billing</button>
+      </div>
+
+      <!-- Servers/VPS Tab -->
+      <div id="servers" class="tab-content">
+        <div class="grid gap-4">
+          <div class="bg-[#1a1a1a] p-4 rounded-lg neon-border flex justify-between items-center">
+            <div>
+              <h4 class="text-lg font-semibold text-[#00ffff]">Minecraft Server</h4>
+              <p class="text-sm text-gray-400">Expires: 2025-05-10 | Status: Active</p>
+            </div>
+            <button onclick="renew('srv001')" class="bg-[#00ffff] text-black font-bold px-3 py-1 rounded hover:bg-cyan-400">Renew</button>
+          </div>
         </div>
-        <button onclick="renew('srv001')" class="bg-[#00ffff] text-black font-bold px-3 py-1 rounded hover:bg-cyan-400">Renew</button>
+      </div>
+
+      <!-- Other Purchases Tab -->
+      <div id="others" class="tab-content hidden">
+        <div class="bg-[#1a1a1a] p-4 rounded-lg neon-border">
+          <h4 class="text-lg font-semibold text-[#00ffff]">Plugin Development</h4>
+          <p class="text-sm text-gray-400">Status: Completed</p>
+        </div>
+      </div>
+
+      <!-- Billing Tab -->
+      <div id="billing" class="tab-content hidden">
+        <div class="bg-[#1a1a1a] p-4 rounded-lg neon-border">
+          <h4 class="text-lg font-semibold text-[#00ffff] mb-2">Billing Summary</h4>
+          <ul class="list-disc pl-4 text-sm text-gray-300">
+            <li>Invoice #001 - $10.00 - Paid</li>
+            <li>Invoice #002 - $15.00 - Pending</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Other Purchases Tab -->
-  <div id="others" class="tab-content hidden">
-    <div class="bg-[#1a1a1a] p-4 rounded-lg neon-border">
-      <h4 class="text-lg font-semibold text-[#00ffff]">Plugin Development</h4>
-      <p class="text-sm text-gray-400">Status: Completed</p>
-    </div>
-  </div>
-
-  <!-- Billing Tab -->
-  <div id="billing" class="tab-content hidden">
-    <div class="bg-[#1a1a1a] p-4 rounded-lg neon-border">
-      <h4 class="text-lg font-semibold text-[#00ffff] mb-2">Billing Summary</h4>
-      <ul class="list-disc pl-4 text-sm text-gray-300">
-        <li>Invoice #001 - $10.00 - Paid</li>
-        <li>Invoice #002 - $15.00 - Pending</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-  </div>  <!-- Edit Modal -->  <div id="editModal" class="fixed inset-0 hidden items-center justify-center z-50">
+  <!-- Edit Modal -->
+  <div id="editModal" class="fixed inset-0 hidden items-center justify-center z-50">
     <div class="modal p-6 rounded-lg neon-border w-96">
       <h3 class="text-xl font-bold text-[#00ffff] mb-4">Edit Profile</h3>
       <input id="editName" type="text" class="w-full mb-3 px-3 py-2 rounded bg-[#1a1a1a] text-white border border-cyan-500" placeholder="Username" />
@@ -102,7 +115,13 @@
         <button onclick="saveProfile()" class="bg-[#00ffff] text-black font-bold px-4 py-2 rounded hover:bg-cyan-400">Save</button>
       </div>
     </div>
-  </div>  <script>
+  </div>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+
     function showTab(tabId, e) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
       document.getElementById(tabId).classList.remove('hidden');
@@ -146,5 +165,6 @@
     function renew(id) {
       alert('Renewing item with ID: ' + id);
     }
-  </script></body>
-</html>
+  </script>
+</body>
+  </html>
