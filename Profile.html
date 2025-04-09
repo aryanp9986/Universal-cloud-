@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neon Profile Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .neon {
+      text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
+    }
+    .neon-border {
+      box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+    }
+    .tab-active {
+      border-color: #0ff !important;
+      color: #0ff !important;
+    }
+    .modal {
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+<body class="p-6">
+  <div class="max-w-5xl mx-auto">
+    <!-- Profile Info -->
+    <div class="flex flex-col sm:flex-row items-center gap-6 mb-8">
+      <div class="relative">
+        <img id="avatar" src="https://via.placeholder.com/150" class="w-24 h-24 rounded-full border-4 neon-border" />
+        <input type="file" accept="image/*" class="absolute bottom-0 right-0 w-8 h-8 opacity-0 cursor-pointer" onchange="uploadAvatar(event)" />
+        <i class="fas fa-camera absolute bottom-0 right-0 text-cyan-300"></i>
+      </div>
+      <div>
+        <h2 id="username" class="text-3xl font-bold neon">Gamer123</h2>
+        <p id="email" class="text-[#00ffff]">gamer123@gmail.com</p>
+        <p class="mt-1 text-sm text-gray-400">Rank: <span class="text-[#0ff]">Paid User</span></p>
+      </div>
+      <div class="ml-auto flex flex-col gap-2">
+        <button onclick="openEditModal()" class="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded neon-border">Edit Profile</button>
+        <button onclick="logout()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded neon-border">Logout</button>
+      </div>
+    </div><!-- Tabs -->
+<div>
+  <div class="flex border-b border-gray-600 mb-4">
+    <button onclick="showTab('servers', event)" class="tab-btn px-4 py-2 border-b-2 tab-active">Servers / VPS</button>
+    <button onclick="showTab('others', event)" class="tab-btn px-4 py-2 border-b-2 text-gray-400">Other Purchases</button>
+    <button onclick="showTab('billing', event)" class="tab-btn px-4 py-2 border-b-2 text-gray-400">Billing</button>
+  </div>
+
+  <!-- Servers/VPS Tab -->
+  <div id="servers" class="tab-content">
+    <div class="grid gap-4">
+      <div class="bg-[#1a1a1a] p-4 rounded-lg neon-border flex justify-between items-center">
+        <div>
+          <h4 class="text-lg font-semibold text-[#00ffff]">Minecraft Server</h4>
+          <p class="text-sm text-gray-400">Expires: 2025-05-10 | Status: Active</p>
+        </div>
+        <button onclick="renew('srv001')" class="bg-[#00ffff] text-black font-bold px-3 py-1 rounded hover:bg-cyan-400">Renew</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Other Purchases Tab -->
+  <div id="others" class="tab-content hidden">
+    <div class="bg-[#1a1a1a] p-4 rounded-lg neon-border">
+      <h4 class="text-lg font-semibold text-[#00ffff]">Plugin Development</h4>
+      <p class="text-sm text-gray-400">Status: Completed</p>
+    </div>
+  </div>
+
+  <!-- Billing Tab -->
+  <div id="billing" class="tab-content hidden">
+    <div class="bg-[#1a1a1a] p-4 rounded-lg neon-border">
+      <h4 class="text-lg font-semibold text-[#00ffff] mb-2">Billing Summary</h4>
+      <ul class="list-disc pl-4 text-sm text-gray-300">
+        <li>Invoice #001 - $10.00 - Paid</li>
+        <li>Invoice #002 - $15.00 - Pending</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  </div>  <!-- Edit Modal -->  <div id="editModal" class="fixed inset-0 hidden items-center justify-center z-50">
+    <div class="modal p-6 rounded-lg neon-border w-96">
+      <h3 class="text-xl font-bold text-[#00ffff] mb-4">Edit Profile</h3>
+      <input id="editName" type="text" class="w-full mb-3 px-3 py-2 rounded bg-[#1a1a1a] text-white border border-cyan-500" placeholder="Username" />
+      <input id="editEmail" type="email" class="w-full mb-3 px-3 py-2 rounded bg-[#1a1a1a] text-white border border-cyan-500" placeholder="Email" />
+      <select id="editRank" class="w-full mb-4 px-3 py-2 rounded bg-[#1a1a1a] text-white border border-cyan-500">
+        <option>Paid User</option>
+        <option>Staff</option>
+        <option>Developer</option>
+        <option>Moderator</option>
+      </select>
+      <div class="flex justify-end gap-2">
+        <button onclick="closeEditModal()" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded">Cancel</button>
+        <button onclick="saveProfile()" class="bg-[#00ffff] text-black font-bold px-4 py-2 rounded hover:bg-cyan-400">Save</button>
+      </div>
+    </div>
+  </div>  <script>
+    function showTab(tabId, e) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+      document.getElementById(tabId).classList.remove('hidden');
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('tab-active'));
+      e.target.classList.add('tab-active');
+    }
+
+    function logout() {
+      alert('Logging out...');
+    }
+
+    function uploadAvatar(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          document.getElementById('avatar').src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function openEditModal() {
+      document.getElementById('editModal').classList.remove('hidden');
+    }
+
+    function closeEditModal() {
+      document.getElementById('editModal').classList.add('hidden');
+    }
+
+    function saveProfile() {
+      const newName = document.getElementById('editName').value;
+      const newEmail = document.getElementById('editEmail').value;
+      const newRank = document.getElementById('editRank').value;
+      if (newName) document.getElementById('username').textContent = newName;
+      if (newEmail) document.getElementById('email').textContent = newEmail;
+      alert('Profile updated!');
+      closeEditModal();
+    }
+
+    function renew(id) {
+      alert('Renewing item with ID: ' + id);
+    }
+  </script></body>
+</html>
