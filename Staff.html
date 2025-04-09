@@ -1,0 +1,97 @@
+<!-- developer-application.html --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Application</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .neon-box {
+      background: #121212;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 15px #00f0ff88, 0 0 25px #1ed9ff88;
+      position: relative;
+    }
+    .neon-title {
+      font-size: 2.25rem;
+      font-weight: bold;
+      color: #00f0ff;
+      text-shadow: 0 0 10px #1ed9ff;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .neon-input, .neon-textarea, .neon-select, .neon-file {
+      background-color: #1a1a1a;
+      color: #00f0ff;
+      border: 2px solid #1ed9ff;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      width: 100%;
+      margin-bottom: 1.25rem;
+    }
+    .submit-btn {
+      background: linear-gradient(to right, #00f0ff, #1ed9ff);
+      color: black;
+      font-weight: bold;
+      padding: 0.75rem 2rem;
+      border-radius: 9999px;
+      box-shadow: 0 0 20px #00f0ff88;
+      transition: all 0.3s ease;
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px #1ed9ffcc;
+    }
+    .hidden-field {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="max-w-3xl mx-auto py-10 px-4">
+    <div class="neon-box">
+      <h1 class="neon-title">Developer Application Form</h1>
+      <form action="submit.php" method="POST" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Full Name" class="neon-input" required>
+        <input type="email" name="email" placeholder="Email Address" class="neon-input" required>
+        <input type="text" name="discord" placeholder="Discord Username (e.g. dev#0001)" class="neon-input"><select name="role" class="neon-select" required>
+      <option value="">Select Your Specialty</option>
+      <option value="plugin">Minecraft Plugin Developer</option>
+      <option value="web">Web UI/UX Designer</option>
+      <option value="backend">Backend Infrastructure Dev</option>
+      <option value="fullstack">Full Stack Game Developer</option>
+    </select>
+
+    <textarea name="experience" rows="4" placeholder="Briefly describe your experience and skills..." class="neon-textarea" required></textarea>
+    <textarea name="portfolio" rows="3" placeholder="Link to portfolio, GitHub, or past work..." class="neon-textarea"></textarea>
+
+    <input type="text" name="location" placeholder="Your Country/Timezone" class="neon-input" required>
+    <input type="text" name="availability" placeholder="Availability (e.g. Weekends, Evenings)" class="neon-input" required>
+
+    <select name="communication" class="neon-select" required>
+      <option value="">Preferred Communication Method</option>
+      <option value="discord">Discord</option>
+      <option value="email">Email</option>
+      <option value="zoom">Zoom/Google Meet</option>
+    </select>
+
+    <textarea name="motivation" rows="3" placeholder="Why do you want to join our team?" class="neon-textarea" required></textarea>
+
+    <label class="text-sm text-cyan-300 mb-1 block">Upload Sample (PDF, DOCX, ZIP)</label>
+    <input type="file" name="attachment" class="neon-file" accept=".pdf,.doc,.docx,.zip">
+
+    <!-- Honeypot Field for Anti-Spam -->
+    <input type="text" name="website" class="hidden-field" tabindex="-1" autocomplete="off">
+
+    <button type="submit" class="submit-btn">Submit Application</button>
+  </form>
+</div>
+
+  </div>
+</body>
+  </html>
