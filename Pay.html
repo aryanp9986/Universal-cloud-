@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #000;
+      font-family: 'Segoe UI', sans-serif;
+      color: #00ffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      width: 100%;
+      background: #0a0a0a;
+      border: 2px solid #00ffff;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 0 20px #00ffff44;
+      transition: all 0.3s ease-in-out;
+      animation: fadeSlideIn 0.6s ease-out;
+    }
+
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ffff;
+      margin-bottom: 25px;
+    }
+
+    .qr-section {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .qr-section img {
+      width: 200px;
+      height: 200px;
+      border: 2px solid #00ffff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #00ffffaa;
+      transition: transform 0.3s ease;
+    }
+
+    .qr-section img:hover {
+      transform: scale(1.05);
+    }
+
+    .info h3 {
+      margin: 12px 0 5px;
+      color: #fff;
+    }
+
+    .info p {
+      margin: 0;
+      color: #aaa;
+      font-size: 15px;
+    }
+
+    .discord-box {
+      margin-top: 20px;
+      background: #111;
+      border: 1px dashed #00ffff;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .discord-box a {
+      color: #00ffff;
+      font-weight: bold;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: color 0.3s ease;
+    }
+
+    .discord-box a:hover {
+      color: #ffffff;
+    }
+
+    .btn, .submit-btn {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background: #00ffff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      box-shadow: 0 0 10px #00ffff, inset 0 0 5px #000;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    .btn:active, .submit-btn:active {
+      transform: scale(0.97);
+    }
+
+    .confirmation-form {
+      display: none;
+      margin-top: 25px;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    .confirmation-form input,
+    .confirmation-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      background: #000;
+      border: 1px solid #00ffff66;
+      border-radius: 8px;
+      color: #00ffff;
+      font-size: 15px;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .confirmation-form input:focus,
+    .confirmation-form textarea:focus {
+      outline: none;
+      border-color: #00ffff;
+      box-shadow: 0 0 8px #00ffff88;
+    }
+
+    .confirmation-message {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background: #002222;
+      border: 1px solid #00ffff;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #00ffff88;
+      text-align: center;
+      font-weight: bold;
+      color: #00ffcc;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #0a0a0a;
+      border-top: 2px solid #00ffff;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      z-index: 1000;
+    }
+
+    .nav-item {
+      color: #00ffff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .nav-item:hover {
+      color: #ffffff;
+    }
+
+    .nav-item i {
+      display: block;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Make a Payment</h1>
+
+    <div class="qr-section">
+      <img src="your-upi-qr-code.png" alt="UPI QR Code"/>
+      <p style="color:#aaa; margin-top: 10px;">Scan to Pay (UPI)</p>
+    </div>
+
+    <div class="info">
+      <h3>UPI ID</h3>
+      <p>univesalcloud.host@bank</p>
+
+      <h3>PayPal</h3>
+      <p>paypal@example.com</p>
+
+      <h3>Crypto</h3>
+      <p>BTC: 1A2b3C4d5E6F...</p>
+      <p>ETH: 0x1234abcd5678...</p>
+    </div>
+
+    <div class="discord-box">
+      <p>Want to pay in another currency?</p>
+      <a href="https://discord.gg/yourserver" target="_blank">
+        <i class="fab fa-discord"></i> Join our Discord
+      </a>
+    </div>
+
+    <button class="btn" onclick="showForm()">I've Paid</button>
+
+    <div class="confirmation-form" id="confirmationForm">
+      <h3 style="color:#fff;">Enter Payment Details</h3>
+      <input type="text" id="appUsed" placeholder="Payment App (e.g. PhonePe, GPay)">
+      <input type="text" id="utr" placeholder="UTR / Transaction ID">
+      <textarea id="note" rows="3" placeholder="Any note (optional)"></textarea>
+      <button class="submit-btn" onclick="submitForm()">Submit</button>
+    </div>
+
+    <div class="confirmation-message" id="confirmationMessage">
+      Thank you! We'll verify your payment. You can check status in your billing section.
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="nav('home')">
+      <i class="fas fa-home"></i>Home
+    </div>
+    <div class="nav-item" onclick="nav('shop')">
+      <i class="fas fa-store"></i>Shop
+    </div>
+    <div class="nav-item" onclick="nav('cart')">
+      <i class="fas fa-shopping-cart"></i>Cart
+    </div>
+    <div class="nav-item" onclick="nav('profile')">
+      <i class="fas fa-user"></i>Profile
+    </div>
+  </div>
+
+  <script>
+    function showForm() {
+      const form = document.getElementById('confirmationForm');
+      form.style.display = 'block';
+      form.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function submitForm() {
+      const app = document.getElementById('appUsed').value.trim();
+      const utr = document.getElementById('utr').value.trim();
+
+      if (!app || !utr) {
+        alert("Please enter Payment App and UTR.");
+        return;
+      }
+
+      document.getElementById('confirmationForm').style.display = 'none';
+      document.getElementById('confirmationMessage').style.display = 'block';
+      document.getElementById('confirmationMessage').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function nav(to) {
+      alert(`Navigate to ${to}`);
+      // Implement real navigation if needed
+    }
+  </script>
+
+</body>
+  </html>
