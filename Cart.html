@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cart</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .cart-container {
+      flex: 1;
+      padding: 20px;
+      padding-bottom: 80px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .cart-header {
+      font-size: 28px;
+      font-weight: bold;
+      color: #00ffff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111;
+      border: 1px solid #00ffff;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+    }
+
+    .item-info {
+      flex: 1;
+      margin-left: 10px;
+    }
+
+    .item-info p {
+      margin: 2px 0;
+    }
+
+    .item-actions {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .btn {
+      background: transparent;
+      color: #00ffff;
+      border: 1px solid #00ffff;
+      border-radius: 5px;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      background: #00ffff;
+      color: #000;
+    }
+
+    .total {
+      text-align: right;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .checkout-btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      font-weight: bold;
+      border: none;
+      background: #00ffff;
+      color: #000;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffff;
+    }
+
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #00ffff;
+      color: #000;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      box-shadow: 0 0 10px #00ffff;
+      z-index: 999;
+      opacity: 0;
+      transform: translateY(-30px);
+      transition: all 0.4s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #0a0a0a;
+      border-top: 2px solid #00ffff;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      z-index: 1000;
+    }
+
+    .nav-item {
+      color: #00ffff;
+      text-align: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .nav-item:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cart-container">
+    <div class="cart-header">Your Cart</div>
+    <div id="cart-items"></div>
+    <div class="total">Total: <span id="total-price">$0.00</span></div>
+    <button class="checkout-btn" onclick="checkout()">Checkout</button>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="nav('Home.html')">Home</div>
+    <div class="nav-item" onclick="nav('Shop.html')">Shop</div>
+    <div class="nav-item" onclick="nav('Cart.html')">Cart</div>
+    <div class="nav-item" onclick="nav('Profile.html')">Profile</div>
+  </div>
+
+  <script>
+    const currentUser = { id: 'user123', name: 'NeonUser' };
+    const cartKey = `cart_${currentUser.id}`;
+    let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+    const cartItemsEl = document.getElementById("cart-items");
+    const totalPriceEl = document.getElementById("total-price");
+    const toast = document.getElementById("toast");
+
+    function renderCart() {
+      cartItemsEl.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartItemsEl.innerHTML = `<p style="color: gray; text-align: center;">Cart is empty.</p>`;
+        totalPriceEl.textContent = "$0.00";
+        return;
+      }
+
+      cart.forEach(item => {
+        total += item.price * item.quantity;
+
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `
+          <div class="item-info">
+            <p><strong>${item.name}</strong></p>
+            <p>$${item.price.toFixed(2)} × ${item.quantity}</p>
+          </div>
+          <div class="item-actions">
+            <button class="btn" onclick="changeQty(${item.id}, -1)">–</button>
+            <button class="btn" onclick="changeQty(${item.id}, 1)">+</button>
+            <button class="btn" onclick="removeItem(${item.id})">×</button>
+          </div>
+        `;
+        cartItemsEl.appendChild(div);
+      });
+
+      totalPriceEl.textContent = "$" + total.toFixed(2);
+      localStorage.setItem(cartKey, JSON.stringify(cart));
+    }
+
+    function changeQty(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+      item.quantity = Math.max(1, item.quantity + delta);
+      renderCart();
+      showToast("Quantity updated");
+    }
+
+    function removeItem(id) {
+      cart = cart.filter(i => i.id !== id);
+      renderCart();
+      showToast("Item removed");
+    }
+
+    function checkout() {
+      if (cart.length === 0) return showToast("Cart is empty!");
+      showToast("Checkout complete!");
+      cart = [];
+      localStorage.removeItem(cartKey);
+      setTimeout(renderCart, 1000);
+    }
+
+    function nav(to) {
+      showToast(`${to.charAt(0).toUpperCase() + to.slice(1)} clicked`);
+      // Simulate navigation
+    }
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 3000);
+    }
+
+    // For store integration
+    function addItemFromStore(item) {
+      const existing = cart.find(i => i.id === item.id);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ ...item, quantity: 1 });
+      }
+      localStorage.setItem(cartKey, JSON.stringify(cart));
+      renderCart();
+      showToast("Item added");
+    }
+
+    renderCart();
+  </script>
+
+</body>
+  </html>
