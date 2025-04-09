@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neon Hosting Hub</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 1rem 2rem 1rem;
+      font-size: 2.5rem;
+      color: #0ff;
+      text-shadow: 0 0 12px #0ff;
+      gap: 1rem;
+    }
+
+    header img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, #0ff3, #0f03);
+      box-shadow: inset 0 0 40px #0ff3;
+      border-top: 2px solid #0ff;
+      border-bottom: 2px solid #0ff;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #ccc;
+      margin-top: 1rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero button {
+      margin-top: 2rem;
+      padding: 1rem 2.5rem;
+      background-color: #0ff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 0 15px #0ff;
+      transition: transform 0.3s;
+    }
+
+    .hero button:hover {
+      transform: scale(1.05);
+    }
+
+    .section {
+      padding: 4rem 2rem;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff;
+      margin-bottom: 2rem;
+      border-left: 6px solid #0f0;
+      padding-left: 1rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background-color: #111;
+      border: 2px solid #0ff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 0 20px #0ff3;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-height: 380px;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px #0ff;
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      color: #0ff;
+      margin-bottom: 0.75rem;
+      text-shadow: 0 0 8px #0ff;
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      color: #ccc;
+      flex-grow: 1;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      background: #0d0d0d;
+      padding: 3rem 2rem;
+      box-shadow: inset 0 0 30px #0ff3;
+    }
+
+    .stat {
+      margin: 1.5rem;
+      text-align: center;
+      min-width: 160px;
+    }
+
+    .stat h2 {
+      font-size: 2.2rem;
+      color: #0ff;
+      text-shadow: 0 0 12px #0ff;
+    }
+
+    .stat p {
+      color: #ccc;
+    }
+
+    .countdown {
+      font-size: 1rem;
+      color: #0f0;
+      text-shadow: 0 0 6px #0f0;
+      margin-top: 1rem;
+    }
+
+    .newsletter, .testimonials, .socials, .partners {
+      text-align: center;
+      padding: 4rem 2rem;
+      background-color: #111;
+      border-top: 2px solid #0ff;
+      border-bottom: 2px solid #0ff;
+    }
+
+    .newsletter input[type="email"] {
+      padding: 0.8rem;
+      width: 280px;
+      border: none;
+      border-radius: 5px;
+      margin-right: 0.5rem;
+    }
+
+    .newsletter button {
+      padding: 0.8rem 1.5rem;
+      background: #0ff;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      border-radius: 5px;
+      box-shadow: 0 0 10px #0ff;
+    }
+
+    .social-icons a {
+      margin: 0 1.2rem;
+      font-size: 1.3rem;
+      color: #0ff;
+      text-decoration: none;
+      text-shadow: 0 0 8px #0ff;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #0a0a0a;
+      display: flex;
+      justify-content: space-around;
+      padding: 1rem 0;
+      border-top: 2px solid #0ff;
+      box-shadow: 0 -2px 15px #0ff3;
+      z-index: 1000;
+    }
+
+    .bottom-nav a {
+      color: #0ff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      text-shadow: 0 0 8px #0ff;
+    }
+
+    .bottom-nav a:hover {
+      color: #0f0;
+      text-shadow: 0 0 8px #0f0;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .section-title {
+        font-size: 1.7rem;
+      }
+      .stat h2 {
+        font-size: 1.8rem;
+      }
+      .card {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="your-logo.png" alt="Logo">
+   Universal Cloud Hosting 
+  </header>
+
+  <section class="hero">
+    <h1>Welcome to Universal Cloud </h1>
+    <p>Your destination for game hosting, powerful servers, developer hiring, and more. Stay updated with the latest offers and announcements!</p>
+    <button>View Plans </button>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Latest Announcements</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="announcement1.jpg" alt="Announcement 1">
+        <h3>New Minecraft Server Locations!</h3>
+        <p>We're expanding! Check out our new low-latency server options in Europe and Asia. More speed, less lag.</p>
+      </div>
+      <div class="card">
+        <img src="announcement2.jpg" alt="Announcement 2">
+        <h3>Spring Sale 50% OFF</h3>
+        <p>All VPS and domain packages are 50% off till the end of this month. Don't miss out!</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Community Stats</h2>
+    <div class="stats">
+      <div class="stat">
+        <h2>150</h2>
+        <p>Active Users</p>
+      </div>
+      <div class="stat">
+        <h2>120</h2>
+        <p>Servers Running</p>
+      </div>
+      <div class="stat">
+        <h2>5+</h2>
+        <p>Developers Hired</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <h2 class="section-title">Subscribe for Updates</h2>
+    <input type="email" placeholder="Enter your email">
+    <button>Subscribe</button>
+  </section>
+
+  <section class="socials">
+    <h2 class="section-title">Follow Us</h2>
+    <div class="social-icons">
+      <a href="#">Facebook</a>
+      <a href="#">Discord</a>
+      <a href="#">X</a>
+      <a href="#">Instagram</a>
+    </div>
+  </section>
+
+  <nav class="bottom-nav">
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">Cart</a>
+    <a href="#">Profile</a>
+  </nav>
+
+</body>
+</html>
