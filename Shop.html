@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Universal Cloud Hosting Categories</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .neon-text {
+      color: #00ffff;
+      text-shadow: 0 0 8px #00ffff, 0 0 12px #00ffff;
+    }
+
+    .category-card {
+      background: linear-gradient(145deg, #111, #0a0a0a);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2), 0 0 30px rgba(0, 255, 255, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.4s ease, background 0.3s;
+    }
+
+    .category-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.5), 0 0 50px rgba(0, 255, 255, 0.2);
+      background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+    }
+
+    .glow-border {
+      border: 2px solid transparent;
+      border-image: linear-gradient(90deg, #0ff, #39ff14, #f0f) 1;
+      border-image-slice: 1;
+    }
+
+    .neon-subtext {
+      color: #bbb;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body class="min-h-screen p-6">
+
+  <!-- Back Button -->
+  <a href="javascript:history.back()" class="fixed top-4 left-4 bg-black/50 text-cyan-400 border border-cyan-400 px-4 py-2 rounded-lg shadow-md hover:bg-cyan-400 hover:text-black transition-all duration-300 text-sm font-semibold neon-text z-50">
+    &larr; Back
+  </a>
+
+  <h1 class="text-4xl font-bold text-center mb-10 neon-text">Explore Our Universal Plans</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+
+    <a href="budget-servers.html" class="block rounded-xl glow-border category-card p-6">
+      <h2 class="text-2xl font-bold neon-text mb-2">Budget Server Plans</h2>
+      <p class="neon-subtext">Affordable hosting for starters and small communities.</p>
+    </a>
+
+    <a href="premium-servers.html" class="block rounded-xl glow-border category-card p-6">
+      <h2 class="text-2xl font-bold text-green-400 mb-2">Premium Server Plans</h2>
+      <p class="neon-subtext">Powerful hosting for medium to large-scale games.</p>
+    </a>
+
+    <a href="pro-vps.html" class="block rounded-xl glow-border category-card p-6">
+      <h2 class="text-2xl font-bold text-purple-400 mb-2">Pro VPS Plans</h2>
+      <p class="neon-subtext">Dedicated resources and pro-grade performance.</p>
+    </a>
+
+    <a href="ultra-vps.html" class="block rounded-xl glow-border category-card p-6">
+      <h2 class="text-2xl font-bold text-pink-400 mb-2">Ultra VPS Plans</h2>
+      <p class="neon-subtext">Extreme performance with high bandwidth and SSD power.</p>
+    </a>
+
+    <a href="domains.html" class="block rounded-xl glow-border category-card p-6">
+      <h2 class="text-2xl font-bold text-yellow-400 mb-2">Domains</h2>
+      <p class="neon-subtext">Buy and manage your gaming domains like <strong>.gg</strong>, <strong>.dev</strong>, and more.</p>
+    </a>
+
+    <a href="developers.html" class="block rounded-xl glow-border category-card p-6">
+      <h2 class="text-2xl font-bold text-cyan-400 mb-2">Developers</h2>
+      <p class="neon-subtext">Hire vetted developers to build your server plugins or websites.</p>
+    </a>
+
+  </div>
+
+</body>
+  </html>
