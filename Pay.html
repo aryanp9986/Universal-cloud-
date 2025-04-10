@@ -206,9 +206,26 @@
       display: block;
       font-size: 18px;
     }
+    
+                    .back-button {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: #1ed9ff;
+      font-weight: bold;
+      text-shadow: 0 0 5px #1ed9ff;
+      transition: color 0.3s ease;
+    }
+    .back-button:hover {
+      color: #00f0ff;
+    }
+    
   </style>
 </head>
+<div class="max-w-3xl mx-auto py-10 px-4">
+    <a href="Shop.html" class="back-button">&larr; Back</a>
+    <div class="neon-box">
 <body>
+
 
   <div class="container">
     <h1>Make a Payment</h1>
@@ -252,21 +269,7 @@
     </div>
   </div>
 
-  <div class="bottom-nav">
-    <div class="nav-item" onclick="nav('home')">
-      <i class="fas fa-home"></i>Home
-    </div>
-    <div class="nav-item" onclick="nav('shop')">
-      <i class="fas fa-store"></i>Shop
-    </div>
-    <div class="nav-item" onclick="nav('cart')">
-      <i class="fas fa-shopping-cart"></i>Cart
-    </div>
-    <div class="nav-item" onclick="nav('profile')">
-      <i class="fas fa-user"></i>Profile
-    </div>
-  </div>
-
+  
   <script>
     function showForm() {
       const form = document.getElementById('confirmationForm');
@@ -275,24 +278,7 @@
     }
 
     function submitForm() {
-      const app = document.getElementById('appUsed').value.trim();
-      const utr = document.getElementById('utr').value.trim();
-
-      if (!app || !utr) {
-        alert("Please enter Payment App and UTR.");
-        return;
-      }
-
-      document.getElementById('confirmationForm').style.display = 'none';
-      document.getElementById('confirmationMessage').style.display = 'block';
-      document.getElementById('confirmationMessage').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function nav(to) {
-      alert(`Navigate to ${to}`);
-      // Implement real navigation if needed
-    }
-  </script>
+      const app = document.ge
 
 </body>
   </html>
