@@ -39,14 +39,23 @@
       color: #bbb;
       text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
     }
+        .back-button {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: #1ed9ff;
+      font-weight: bold;
+      text-shadow: 0 0 5px #1ed9ff;
+      transition: color 0.3s ease;
+    }
+    .back-button:hover {
+      color: #00f0ff;
+    }
   </style>
 </head>
+<div class="max-w-3xl mx-auto py-10 px-4">
+    <a href="Home.html" class="back-button">&larr; Back</a>
+    <div class="neon-box"> 
 <body class="min-h-screen p-6">
-
-  <!-- Back Button -->
-  <a href="javascript:history.back()" class="fixed top-4 left-4 bg-black/50 text-cyan-400 border border-cyan-400 px-4 py-2 rounded-lg shadow-md hover:bg-cyan-400 hover:text-black transition-all duration-300 text-sm font-semibold neon-text z-50">
-    &larr; Back
-  </a>
 
   <h1 class="text-4xl font-bold text-center mb-10 neon-text">Explore Our Universal Plans</h1>
 
@@ -85,4 +94,5 @@
   </div>
 
 </body>
-  </html>
+    </html>
+      
