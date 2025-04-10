@@ -1,134 +1,226 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Universal store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Neon Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet"/>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0a0a0a;
-      color: #fff;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(#000, #020a1a);
+      overflow: hidden;
+      color: #0ff;
+    }
+
+    .neon-bg {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: repeating-radial-gradient(circle at center, #0ff3, #000 15%);
+      animation: pulse 6s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes pulse {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.3); }
+    }
+
+    .card {
+      max-width: 400px;
+      margin: 10vh auto;
+      background: rgba(0,0,0,0.65);
+      border: 2px solid #0ff;
+      border-radius: 16px;
+      box-shadow: 0 0 20px #0ff, 0 0 60px #0ff3;
+      padding: 2rem;
+      backdrop-filter: blur(8px);
+    }
+
+    h2 {
+      text-align: center;
+      color: #0ff;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 15px #0ff;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1.2rem;
+      background: transparent;
+      border: 1px solid #0ff;
+      color: #0ff;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    .toggle-pass {
+      font-size: 0.8rem;
+      text-align: right;
+      margin-top: -1rem;
+      margin-bottom: 1rem;
+      color: #0ff;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 10px;
+      background: #0ff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #00ffee;
+      box-shadow: 0 0 10px #0ff;
+    }
+
+    .social-buttons {
       display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
       justify-content: center;
+    }
+
+    .social-buttons button {
+      flex: 1;
+      display: flex;
       align-items: center;
-      height: 100vh;
-    }.login-container {
-  background: #111;
-  border-radius: 20px;
-  padding: 40px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 0 20px #00ffe7;
-  text-align: center;
-}
+      justify-content: center;
+      gap: 0.5rem;
+      background: transparent;
+      border: 1px solid #0ff;
+      color: #0ff;
+    }
 
-.login-container h2 {
-  margin-bottom: 30px;
-  color: #00ffe7;
-  font-size: 2em;
-}
+    .social-buttons button:hover {
+      background: #0ff2;
+    }
 
-.input-field {
-  background: #1e1e1e;
-  border: none;
-  border-radius: 30px;
-  padding: 15px;
-  margin: 10px 0;
-  width: 100%;
-  font-size: 1em;
-  color: #00ffe7;
-}
+    .social-buttons img {
+      width: 20px;
+      height: 20px;
+    }
 
-.input-field::placeholder {
-  color: #777;
-}
+    .switch {
+      text-align: center;
+      margin-top: 1rem;
+    }
 
-.forgot-password {
-  display: block;
-  margin-bottom: 20px;
-  color: #00aaff;
-  text-decoration: none;
-  font-size: 0.9em;
-}
+    .switch a {
+      color: #0ff;
+      text-decoration: underline;
+      cursor: pointer;
+    }
 
-.sign-in-button {
-  background: linear-gradient(45deg, #00ffe7, #00aaff);
-  border: none;
-  border-radius: 30px;
-  padding: 15px;
-  color: #000;
-  font-weight: bold;
-  width: 100%;
-  cursor: pointer;
-  font-size: 1em;
-  transition: 0.3s;
-}
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0ff;
+      color: #000;
+      padding: 0.8rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #0ff;
+      display: none;
+      z-index: 10;
+      font-weight: bold;
+    }
 
-.sign-in-button:hover {
-  transform: scale(1.05);
-}
-
-.social-login {
-  margin-top: 20px;
-}
-
-.social-login p {
-  margin-bottom: 10px;
-  color: #888;
-}
-
-.social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.social-icons a {
-  background: #1e1e1e;
-  padding: 10px;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #00ffe7;
-  transition: 0.3s;
-}
-
-.social-icons a:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px #00ffe7;
-}
-
-.social-icons img {
-  width: 24px;
-  height: 24px;
-}
-
-.license-link {
-  display: block;
-  margin-top: 20px;
-  color: #00aaff;
-  text-decoration: none;
-  font-size: 0.8em;
-}
-
+    .toast.error {
+      background: #ff0044;
+      color: #fff;
+      box-shadow: 0 0 10px #ff0044;
+    }
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <h2>Sign In</h2>
-    <input type="email" class="input-field" placeholder="E-mail" />
-    <input type="password" class="input-field" placeholder="Password" />
-    <a href="#" class="forgot-password">Forgot Password?</a>
-    <button class="sign-in-button">Sign In</button><div class="social-login">
-  <p>Or Sign in with</p>
-  <div class="social-icons">
-    <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/google-logo.png" alt="Google"></a>
-    <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/mac-os.png" alt="Apple"></a>
-    <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitterx.png" alt="X"></a>
+  <div class="neon-bg"></div>
+  <div class="card">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@example.com" required />
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="••••••••" required />
+      <div class="toggle-pass" onclick="togglePassword()">Show / Hide Password</div>
+      <button type="submit">Login</button>
+    </form>
+    <div class="social-buttons">
+      <button onclick="loginWithGoogle()">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/> Google
+      </button>
+      <button onclick="loginWithDiscord()">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Discord_logo.svg"/> Discord
+      </button>
+    </div>
+    <div class="switch">Don't have an account? <a href="Signup.html">Sign up</a></div>
   </div>
-</div>
 
-<a href="#" class="license-link">Learn user licence agreement</a>
+  <div class="toast" id="toast"></div>
 
-  </div>
+  <script>
+    const form = document.getElementById('loginForm');
+    const toast = document.getElementById('toast');
+    const passwordInput = document.getElementById('password');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = passwordInput.value.trim();
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const match = users.find(user => user.email === email && user.password === password);
+      if (match) {
+        localStorage.setItem('currentUser', JSON.stringify(match));
+        showToast('Login successful!');
+        setTimeout(() => location.href = 'dashboard.html', 1500);
+      } else {
+        showToast('Invalid credentials!', true);
+      }
+    });
+
+    function loginWithGoogle() {
+      const user = { email: 'google@user.com', username: 'GoogleUser' };
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      showToast('Logged in with Google!');
+      setTimeout(() => location.href = 'dashboard.html', 1500);
+    }
+
+    function loginWithDiscord() {
+      const user = { email: 'discord@user.com', username: 'DiscordUser' };
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      showToast('Logged in with Discord!');
+      setTimeout(() => location.href = 'dashboard.html', 1500);
+    }
+
+    function showToast(msg, error = false) {
+      toast.textContent = msg;
+      toast.className = 'toast' + (error ? ' error' : '');
+      toast.style.display = 'block';
+      setTimeout(() => toast.style.display = 'none', 3000);
+    }
+
+    function togglePassword() {
+      passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    }
+  </script>
 </body>
-  </html>
+</html>
