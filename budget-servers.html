@@ -94,8 +94,22 @@
         background-position: 0% 50%;
       }
     }
+                .back-button {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: #1ed9ff;
+      font-weight: bold;
+      text-shadow: 0 0 5px #1ed9ff;
+      transition: color 0.3s ease;
+    }
+    .back-button:hover {
+      color: #00f0ff;
+    }
   </style>
 </head>
+  <div class="max-w-3xl mx-auto py-10 px-4">
+    <a href="Shop.html" class="back-button">&larr; Back</a>
+    <div class="neon-box">
 <body x-data="{ page: 'home', selectedPlan: null, selectPlan(plan) { this.selectedPlan = plan; this.page = 'payment'; } }">
   <template x-if="page === 'home'">
     <div class="px-4 py-10 max-w-6xl mx-auto">
@@ -138,4 +152,4 @@
     </div>
   </template>
 </body>
-  </html>
+    </html>
