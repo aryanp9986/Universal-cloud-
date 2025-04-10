@@ -2,26 +2,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ultra VPS Plans</title>
+  <title>Pro VPS Plans</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0a0a0a;
-      color: #fff3ec;
+      background-color: #000814;
+      color: #d0e7ff;
     }
     .card {
       position: relative;
-      background: #1a1a1a;
+      background: #001d3d;
       border-radius: 1.5rem;
       padding: 1.5rem;
       overflow: hidden;
-      box-shadow: 0 0 15px #ff6ec7aa, 0 0 25px #ffb3ecaa;
+      box-shadow: 0 0 10px #0096c7aa, 0 0 20px #00b4d8aa;
       transition: transform 0.3s ease;
     }
     .card:hover {
-      transform: scale(1.03);
+      transform: scale(1.02);
     }
     .card::before {
       content: '';
@@ -30,11 +30,11 @@
       left: -4px;
       right: -4px;
       bottom: -4px;
-      background: linear-gradient(270deg, #ff6ec7, #ffb3ec, #ff6ec7);
+      background: linear-gradient(270deg, #00b4d8, #48cae4, #00b4d8);
       background-size: 600% 600%;
       z-index: 0;
       border-radius: 1.5rem;
-      animation: borderFlow 7s linear infinite;
+      animation: borderGlow 6s linear infinite;
     }
     .card::after {
       content: '';
@@ -43,7 +43,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: #1a1a1a;
+      background: #001d3d;
       border-radius: 1.5rem;
       z-index: 1;
       opacity: 0.95;
@@ -53,13 +53,13 @@
       z-index: 2;
     }
     .buy-button {
-      background: linear-gradient(135deg, #ff6ec7, #ffb3ec);
+      background: linear-gradient(135deg, #00b4d8, #48cae4);
       border: none;
       border-radius: 9999px;
       padding: 0.75rem 1.5rem;
       font-weight: 700;
       color: #000;
-      box-shadow: 0 0 20px #ff99d699;
+      box-shadow: 0 0 15px #00e0ff99;
       transition: 0.3s ease;
       text-align: center;
       display: inline-block;
@@ -67,23 +67,23 @@
     }
     .buy-button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 30px #ffc0f1bb;
+      box-shadow: 0 0 25px #90e0efbb;
     }
     .section-title {
       font-size: 3rem;
       font-weight: 800;
       text-align: center;
       margin-bottom: 2rem;
-      color: #ff6ec7;
-      text-shadow: 0 0 8px #ff6ec7, 0 0 14px #ffb3ec;
+      color: #00b4d8;
+      text-shadow: 0 0 8px #00b4d8, 0 0 14px #48cae4;
     }
     .neon-title {
       font-weight: 700;
       font-size: 1.5rem;
-      color: #ffb3ec;
-      text-shadow: 0 0 5px #ffb3ec, 0 0 10px #ff6ec7;
+      color: #90e0ef;
+      text-shadow: 0 0 5px #90e0ef, 0 0 10px #00b4d8;
     }
-    @keyframes borderFlow {
+    @keyframes borderGlow {
       0% {
         background-position: 0% 50%;
       }
@@ -94,46 +94,47 @@
         background-position: 0% 50%;
       }
     }
-      .back-button {
+        
+            .back-button {
       display: inline-block;
       margin-bottom: 1rem;
-      color: #ffb6ec7;
+      color: #1ed9ff;
       font-weight: bold;
-      text-shadow: 0 0 5px #ffb3ec;
+      text-shadow: 0 0 5px #1ed9ff;
       transition: color 0.3s ease;
     }
     .back-button:hover {
       color: #00f0ff;
     }
-  </style>
+</style>
 </head>
-<div class="max-w-3xl mx-auto py-10 px-4">
+  <div class="max-w-3xl mx-auto py-10 px-4">
     <a href="Shop.html" class="back-button">&larr; Back</a>
     <div class="neon-box">
 <body x-data="{ page: 'home', selectedPlan: null, selectPlan(plan) { this.selectedPlan = plan; this.page = 'payment'; } }">
   <template x-if="page === 'home'">
     <div class="px-4 py-10 max-w-6xl mx-auto">
-      <h1 class="section-title">Ultra VPS Hosting Plans</h1>
+      <h1 class="section-title">Pro VPS Hosting Plans</h1>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <template x-for="(plan, index) in [
-          { name: 'Ultra Core', ram: '8GB', storage: '200GB NVMe', price: 24.99, original: 29.99, rating: '★★★★☆', reviews: 140 },
-          { name: 'Ultra Boost', ram: '16GB', storage: '400GB NVMe', price: 39.99, original: 44.99, rating: '★★★★☆', reviews: 180 },
-          { name: 'Ultra Max', ram: '32GB', storage: '800GB NVMe', price: 59.99, original: 69.99, rating: '★★★★★', reviews: 220 },
-          { name: 'Ultra Titan', ram: '64GB', storage: '1.2TB NVMe', price: 84.99, original: 94.99, rating: '★★★★★', reviews: 270 },
-          { name: 'Ultra Supreme', ram: '96GB', storage: '1.6TB NVMe', price: 114.99, original: 124.99, rating: '★★★★★', reviews: 320 },
-          { name: 'Ultra Nova', ram: '128GB', storage: '2TB NVMe', price: 139.99, original: 149.99, rating: '★★★★★', reviews: 360 },
-          { name: 'Ultra Warp', ram: '160GB', storage: '2.5TB NVMe', price: 169.99, original: 179.99, rating: '★★★★★', reviews: 400 },
-          { name: 'Ultra Infinite', ram: '192GB', storage: '3TB NVMe', price: 199.99, original: 209.99, rating: '★★★★★', reviews: 450 }
+          { name: 'VPS Starter', ram: '4GB', storage: '80GB SSD', price: 14.99, original: 19.99, rating: '★★★★☆', reviews: 120 },
+          { name: 'VPS Boost', ram: '8GB', storage: '160GB SSD', price: 19.99, original: 24.99, rating: '★★★★☆', reviews: 150 },
+          { name: 'VPS Turbo', ram: '16GB', storage: '320GB SSD', price: 29.99, original: 34.99, rating: '★★★★★', reviews: 180 },
+          { name: 'VPS Ultra', ram: '32GB', storage: '640GB SSD', price: 49.99, original: 59.99, rating: '★★★★★', reviews: 200 },
+          { name: 'VPS Titan', ram: '48GB', storage: '960GB SSD', price: 69.99, original: 79.99, rating: '★★★★★', reviews: 230 },
+          { name: 'VPS Cosmic', ram: '64GB', storage: '1.2TB SSD', price: 89.99, original: 99.99, rating: '★★★★★', reviews: 260 },
+          { name: 'VPS Warp', ram: '80GB', storage: '1.5TB SSD', price: 109.99, original: 119.99, rating: '★★★★★', reviews: 300 },
+          { name: 'VPS Infinity', ram: '128GB', storage: '2TB SSD', price: 139.99, original: 149.99, rating: '★★★★★', reviews: 340 }
         ]" :key="index">
           <div class="card">
             <h2 class="neon-title" x-text="plan.name"></h2>
-            <p class="mt-2 text-pink-200" x-text="plan.ram + ' RAM, ' + plan.storage + ', Supercharged Network' "></p>
-            <div class="mt-4 text-pink-300 font-bold text-lg">
+            <p class="mt-2 text-blue-200" x-text="plan.ram + ' RAM, ' + plan.storage + ', High-Speed Network' "></p>
+            <div class="mt-4 text-cyan-300 font-bold text-lg">
               $<span x-text="plan.price.toFixed(2)"></span>
               <span class="line-through text-red-400 ml-2 text-sm">$<span x-text="plan.original.toFixed(2)"></span></span>
             </div>
-            <div class="mt-2 text-sm text-pink-100">
-              <span x-text="plan.rating"></span> <span x-text="plan.reviews"></span> reviews)
+            <div class="mt-2 text-sm text-blue-100">
+              <span x-text="plan.rating"></span> (<span x-text="plan.reviews"></span> reviews)
             </div>
             <button class="buy-button mt-4" @click="selectPlan(plan)">Buy <span x-text="plan.name"></span></button>
           </div>
@@ -143,11 +144,11 @@
   </template>  <template x-if="page === 'payment'">
     <div class="max-w-xl mx-auto mt-16 text-center">
       <h1 class="section-title">Payment Page</h1>
-      <div class="bg-pink-950 bg-opacity-50 p-6 rounded-2xl shadow-xl border border-pink-400">
-        <h2 class="text-2xl font-bold text-pink-300 mb-4" x-text="'You are purchasing: ' + selectedPlan.name"></h2>
-        <p class="text-lg mb-2 text-pink-100" x-text="'Price: $' + selectedPlan.price.toFixed(2)"></p>
+      <div class="bg-blue-950 bg-opacity-60 p-6 rounded-2xl shadow-xl border border-cyan-400">
+        <h2 class="text-2xl font-bold text-cyan-300 mb-4" x-text="'You are purchasing: ' + selectedPlan.name"></h2>
+        <p class="text-lg mb-2 text-blue-200" x-text="'Price: $' + selectedPlan.price.toFixed(2)"></p>
         <button class="buy-button mt-4 w-full">Proceed to Payment</button>
-        <button class="mt-4 underline text-sm text-pink-200" @click="page = 'home'">Back to Plans</button>
+        <button class="mt-4 underline text-sm text-cyan-200" @click="page = 'home'">Back to Plans</button>
       </div>
     </div>
   </template>
