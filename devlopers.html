@@ -81,15 +81,22 @@
       transform: translateY(-2px);
       box-shadow: 0 0 30px #1ed9ffcc;
     }
+            .back-button {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: #1ed9ff;
+      font-weight: bold;
+      text-shadow: 0 0 5px #1ed9ff;
+      transition: color 0.3s ease;
+    }
+    .back-button:hover {
+      color: #00f0ff;
+    }
   </style>
 </head>
- <!-- Back Button -->
-    <div class="mb-4">
-      <button onclick="goBack()" class="flex items-center gap-2 text-[#00ffff] hover:text-cyan-300 neon">
-        <i class="fas fa-arrow-left"></i>
-        <span>Back</span>
-      </button>
-    </div> 
+<div class="max-w-3xl mx-auto py-10 px-4">
+    <a href="Shop.html" class="back-button">&larr; Back</a>
+    <div class="neon-box">
 <body x-data="{ devs: [
   { name: 'Alex Carter', role: 'Minecraft Plugin Developer', price: '$20 - $50/hr', desc: 'Expert in Bukkit/Spigot plugin development and server optimization.', img: 'https://i.pravatar.cc/100?img=1' },
   { name: 'Lena Kim', role: 'Web UI/UX Designer', price: '$25 - $60/hr', desc: 'Designs responsive, neon-themed dashboards and control panels.', img: 'https://i.pravatar.cc/100?img=2' },
@@ -113,7 +120,7 @@
             </div>
           </div>
           <p class="mt-3 text-cyan-200 text-sm" x-text="dev.desc"></p>
-          <a href="https://discord.gg/4J7TTCJTZV" class="hire-button">Hire</a>
+          <a href="#" class="hire-button">Hire</a>
         </div>
       </template>
     </div>
