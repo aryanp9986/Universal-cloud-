@@ -1,127 +1,321 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neon Sign Up</title>
+  <title>Neon Signup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d9d5a64e.js" crossorigin="anonymous"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
-
     body {
       margin: 0;
+      padding: 0;
+      background: #0d0d0d;
       font-family: 'Orbitron', sans-serif;
-      background: radial-gradient(ellipse at top, #0f0f0f, #000000);
+      color: #00ffff;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      color: #fff;
+      overflow: hidden;
+    }.neon-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #0d0d0d;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.neon-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+  background: radial-gradient(circle, #00ffff 0%, transparent 70%);
+  animation: float 20s linear infinite;
+}
+
+.neon-circle:nth-child(1) {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  left: -100px;
+}
+
+.neon-circle:nth-child(2) {
+  width: 300px;
+  height: 300px;
+  bottom: -100px;
+  right: -100px;
+}
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
+
+.signup-box {
+  position: relative;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.85);
+  border: 2px solid #00ffff;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 350px;
+  max-width: 90vw;
+  box-shadow: 0 0 20px #00ffff, 0 0 60px #00ffff40;
+}
+
+.signup-box h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #0ff;
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+}
+
+.signup-box label {
+  font-size: 0.9rem;
+  color: #0ff;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.signup-box input {
+  width: 100%;
+  padding: 0.75rem;
+  background: transparent;
+  border: 1px solid #0ff;
+  color: #0ff;
+  border-radius: 8px;
+  outline: none;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #00ffff;
+}
+
+.signup-box button {
+  width: 100%;
+  padding: 0.75rem;
+  background: #00ffff;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.signup-box button:hover {
+  background: #0fffd0;
+  box-shadow: 0 0 10px #0ff;
+}
+
+.social-login {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.social-login a {
+  color: #0ff;
+  font-size: 2rem;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.social-login a:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.note {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #0ff;
+  margin-top: 1rem;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #00ffff;
+  color: #000;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+  display: none;
+  z-index: 999;
+  font-weight: bold;
+  text-align: center;
+}
+
+.error {
+  background: #ff0055;
+  color: #fff;
+  box-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055;
+}
+
+.strength {
+  text-align: right;
+  font-size: 0.8rem;
+  margin-top: -1.2rem;
+  margin-bottom: 1rem;
+  color: #0ff;
+}
+            .back-button {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: #1ed9ff;
+      font-weight: bold;
+      text-shadow: 0 0 5px #1ed9ff;
+      transition: color 0.3s ease;
+    }
+    .back-button:hover {
+      color: #00f0ff;
     }
 
-    .container {
-      background: rgba(0, 0, 0, 0.8);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 30px #00f7ff;
-      width: 320px;
-      text-align: center;
-    }
-
-    .container h1 {
-      font-size: 2rem;
-      color: #00f7ff;
-      margin-bottom: 30px;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 10px;
-      background: #111;
-      color: #fff;
-      box-shadow: 0 0 10px #8000ff;
-      outline: none;
-      transition: box-shadow 0.3s;
-    }
-
-    input:focus {
-      box-shadow: 0 0 15px #00ffea;
-    }
-
-    .btn {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      background: linear-gradient(45deg, #ff00cc, #3333ff);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1rem;
-      box-shadow: 0 0 20px #ff00cc;
-      transition: background 0.3s, transform 0.2s;
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px #00ffea;
-    }
-
-    .socials {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 20px;
-    }
-
-    .socials button {
-      background: #111;
-      border: none;
-      border-radius: 50%;
-      padding: 12px;
-      box-shadow: 0 0 12px #00ffea;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .socials button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 18px #ff00cc;
-    }
-
-    .agreement {
-      margin-top: 15px;
-      font-size: 0.8rem;
-    }
-
-    .agreement a {
-      color: #00f7ff;
-      text-decoration: none;
-    }
-
-    .agreement a:hover {
-      text-decoration: underline;
-    }
   </style>
 </head>
+<div class="max-w-3xl mx-auto py-10 px-4">
+    <a href="index.html" class="back-button">&larr; Back</a>
+    <div class="neon-box">
 <body>
-  <div class="container">
-    <h1>Sign Up</h1>
-    <input type="text" placeholder="In game name" />
-    <input type="email" placeholder="E-mail" />
-    <input type="password" placeholder="Password" />
-    <button class="btn">Sign Up</button>
+  <div class="neon-background">
+    <div class="neon-circle"></div>
+    <div class="neon-circle"></div>
+  </div>  <div class="signup-box" role="form">
+    <h2>Sign Up</h2>
+    <form id="signupForm" novalidate>
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Username" required aria-required="true" /><label for="email">Email</label>
+  <input type="email" id="email" placeholder="Email" required aria-required="true" />
 
-    <div class="socials">
-      <button><img src="https://img.icons8.com/ios-filled/24/ffffff/google-logo.png"/></button>
-      <button><img src="https://img.icons8.com/ios-filled/24/ffffff/mac-os.png"/></button>
-      <button><img src="https://img.icons8.com/ios-filled/24/ffffff/twitterx.png"/></button>
-    </div>
-
-    <div class="agreement">
-      <a href="#">Learn user licence agreement</a>
+  <label for="password">Password</label>
+  <div class="input-container">
+    <input type="password" id="password" placeholder="Password" required aria-required="true" minlength="6" />
+    <div class="toggle-password" onclick="togglePassword('password', this)">
+      <i class="fas fa-eye"></i>
     </div>
   </div>
-</body>
-</html>
+  <div class="strength" id="strength"></div>
+
+  <label for="confirm">Confirm Password</label>
+  <div class="input-container">
+    <input type="password" id="confirm" placeholder="Confirm Password" required aria-required="true" />
+    <div class="toggle-password" onclick="togglePassword('confirm', this)">
+      <i class="fas fa-eye"></i>
+    </div>
+  </div>
+  <div class="password-match" id="match"></div>
+
+  <button type="submit" id="submitBtn">Create Account</button>
+</form>
+<div class="note">Or sign up with</div>
+<div class="social-login">
+  <a href="#"><i class="fab fa-google" aria-label="Login with Google"></i></a>
+  <a href="#"><i class="fab fa-discord" aria-label="Login with Discord"></i></a>
+</div>
+
+  </div>  <div class="toast" id="toast"></div>  <script>
+    const form = document.getElementById('signupForm');
+    const toast = document.getElementById('toast');
+    const passwordInput = document.getElementById('password');
+    const confirmInput = document.getElementById('confirm');
+    const strengthMessage = document.getElementById('strength');
+    const matchMessage = document.getElementById('match');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = passwordInput.value.trim();
+      const confirm = confirmInput.value.trim();
+
+      if (!username || !email || !password || !confirm) {
+        showToast('Please fill out all required fields.', true);
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showToast('Enter a valid email address.', true);
+        return;
+      }
+
+      if (password.length < 6) {
+        showToast('Password must be at least 6 characters.', true);
+        return;
+      }
+
+      if (password !== confirm) {
+        matchMessage.textContent = 'Passwords do not match';
+        matchMessage.style.color = '#f00';
+        showToast('Passwords do not match!', true);
+        return;
+      }
+
+      const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+      if (existingUsers.some(user => user.email === email)) {
+        showToast('Email is already registered.', true);
+        return;
+      }
+
+      existingUsers.push({ username, email, password });
+      localStorage.setItem('users', JSON.stringify(existingUsers));
+
+      showToast('Signup successful! Redirecting...');
+      setTimeout(() => window.location.href = 'dashboard.html', 2000);
+    });
+
+    passwordInput.addEventListener('input', function () {
+      const val = passwordInput.value;
+      let strength = 'Weak';
+      let color = '#ff0055';
+
+      if (val.length > 8 && /[A-Z]/.test(val) && /[0-9]/.test(val) && /[^a-zA-Z0-9]/.test(val)) {
+        strength = 'Strong';
+        color = '#00ff99';
+      } else if (val.length >= 6 && /[A-Z0-9]/.test(val)) {
+        strength = 'Moderate';
+        color = '#ffaa00';
+      }
+
+      strengthMessage.textContent = `Strength: ${strength}`;
+      strengthMessage.style.color = color;
+    });
+
+    function togglePassword(id, icon) {
+      const input = document.getElementById(id);
+      const eyeIcon = icon.querySelector('i');
+      if (input.type === 'password') {
+        input.type = 'text';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+      } else {
+        input.type = 'password';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+      }
+    }
+
+    function showToast(message, isError = false) {
+      toast.textContent = message;
+      toast.className = 'toast' + (isError ? ' error' : '');
+      toast.style.display = 'block';
+      setTimeout(() => toast.style.display = 'none', 3000);
+    }
+  </script></body>
+      </html>
