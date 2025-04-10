@@ -83,12 +83,23 @@
     .back-button:hover {
       color: #00f0ff;
     }
+        .back-button {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: #1ed9ff;
+      font-weight: bold;
+      text-shadow: 0 0 5px #1ed9ff;
+      transition: color 0.3s ease;
+    }
+    .back-button:hover {
+      color: #00f0ff;
+    }
   </style>
 </head>
-  <div class="max-w-3xl mx-auto py-10 px-4">
+<div class="max-w-3xl mx-auto py-10 px-4">
     <a href="Shop.html" class="back-button">&larr; Back</a>
     <div class="neon-box">
-    <body x-data="{ page: 'domain', domains: [
+<body x-data="{ page: 'domain', domains: [
   { name: 'yourname.com', price: 11.99, extension: '.com', popularity: 'Popular', reviews: 120 },
   { name: 'yourbrand.net', price: 9.99, extension: '.net', popularity: 'Trusted', reviews: 85 },
   { name: 'coolorg.org', price: 10.99, extension: '.org', popularity: 'Reliable', reviews: 70 },
