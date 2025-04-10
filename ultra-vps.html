@@ -94,8 +94,22 @@
         background-position: 0% 50%;
       }
     }
+      .back-button {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: #ffb6ec7;
+      font-weight: bold;
+      text-shadow: 0 0 5px #ffb3ec;
+      transition: color 0.3s ease;
+    }
+    .back-button:hover {
+      color: #00f0ff;
+    }
   </style>
 </head>
+<div class="max-w-3xl mx-auto py-10 px-4">
+    <a href="Shop.html" class="back-button">&larr; Back</a>
+    <div class="neon-box">
 <body x-data="{ page: 'home', selectedPlan: null, selectPlan(plan) { this.selectedPlan = plan; this.page = 'payment'; } }">
   <template x-if="page === 'home'">
     <div class="px-4 py-10 max-w-6xl mx-auto">
@@ -119,7 +133,7 @@
               <span class="line-through text-red-400 ml-2 text-sm">$<span x-text="plan.original.toFixed(2)"></span></span>
             </div>
             <div class="mt-2 text-sm text-pink-100">
-              <span x-text="plan.rating"></span> (<span x-text="plan.reviews"></span> reviews)
+              <span x-text="plan.rating"></span> <span x-text="plan.reviews"></span> reviews)
             </div>
             <button class="buy-button mt-4" @click="selectPlan(plan)">Buy <span x-text="plan.name"></span></button>
           </div>
@@ -138,4 +152,4 @@
     </div>
   </template>
 </body>
-  </html>
+    </html>
